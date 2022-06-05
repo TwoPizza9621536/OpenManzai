@@ -3,13 +3,10 @@
 
 #include <string.h>
 
-#ifdef __linux__
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#else
-#include <SDL.h>
-#include <SDL_image.h>
-#endif
+#include "SDL.h"
+#include "SDL_image.h"
+
+/* Gets the relative path of a resource. */
 const char* getResourcePath(const char *path);
 
 #endif /* OPENMANZI_RESOURCE_PATH_H */
