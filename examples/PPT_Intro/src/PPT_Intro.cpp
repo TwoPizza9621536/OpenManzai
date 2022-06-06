@@ -1,3 +1,15 @@
+/**
+ * @file PPT_Intro.cpp
+ * @author OpenManzi Contributors
+ * @brief The opening to Puyo Puyo Tetris. A test program for the main
+ *        [INSERT THING HERE].
+ * @version 0.0.0
+ * @date 2022-06-06
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include "OpenManzi.h"
 
 static const char* WINDOW_NAME = "Puyo Puyo Tetris Intro";
