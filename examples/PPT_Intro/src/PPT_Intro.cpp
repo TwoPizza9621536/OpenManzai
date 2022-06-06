@@ -1,5 +1,7 @@
 #include "OpenManzi.h"
 
+static const char* WINDOW_NAME = "Puyo Puyo Tetris Intro";
+
 // static const int WINDOW_WIDTH = 2000;
 // static const int WINDOW_HEIGHT = 1024;
 
@@ -11,6 +13,9 @@ static const int BACKGROUND_HEIGHT = 1024;
 
 static const char *BACKGROUND_PATH = "assets/bg/school/school_1.png";
 static const char *BACKGROUND_CUTIN_PATH = "assets/bg/school/school_0.png";
+
+static const char *RINGO_PATH = "assets/manzi/rng/rng_0.png";
+static const char *RINGO_FACE_PATH = "assets/manzi/rng/rng_3.png";
 
 int main()
 {
@@ -31,7 +36,7 @@ int main()
     }
 
     SDL_Window *window = SDL_CreateWindow(
-        "Testing 1 2 3", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+        WINDOW_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
         WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
     if (window == NULL)
     {
@@ -55,7 +60,10 @@ int main()
     OpenManzi_Sprite *bg = OpenManzi_CreateSprite(renderer, BACKGROUND_PATH);
     OpenManzi_Sprite *bgCutin =
         OpenManzi_CreateSprite(renderer, BACKGROUND_CUTIN_PATH);
-    if (bg == NULL)
+    OpenManzi_Sprite *rng = OpenManzi_CreateSprite(renderer, RINGO_PATH);
+    OpenManzi_Sprite *rngFace =
+        OpenManzi_CreateSprite(renderer, RINGO_FACE_PATH);
+    if (bg == NULL || bgCutin == NULL)
     {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR,
                      "Could not create sprite: %s\n",
@@ -91,16 +99,29 @@ int main()
         OpenManzi_SetSpriteDestination(bg, 0, 110, WINDOW_WIDTH, WINDOW_HEIGHT);
         OpenManzi_RenderSprite(renderer, bg, 0, NULL, SDL_FLIP_NONE);
 
-        OpenManzi_SetSpriteDestination(bgCutin, 1748, 0, 2048, 632);
+        // OpenManzi_SetSpriteDimensions(bgCutin, 1748, 0, 2048, 632);
+        // OpenManzi_SetSpriteDestination(bgCutin, 0, 50, 326, 1024);
+        // OpenManzi_RenderSprite(renderer, bgCutin, 90, NULL, SDL_FLIP_NONE);
 
         OpenManzi_SetSpriteDimensions(bgCutin, 0, 888, 814, 136);
         OpenManzi_SetSpriteDestination(bgCutin, 0, 0, 651, 110);
         OpenManzi_RenderSprite(renderer, bgCutin, 0, NULL, SDL_FLIP_NONE);
+
+        OpenManzi_SetSpriteDimensions(rng, 0, 0, 512, 1024);
+        OpenManzi_SetSpriteDestination(rng, 100, 100, 0, 0);
+        OpenManzi_RenderSprite(renderer, rng, 0, NULL, SDL_FLIP_HORIZONTAL);
+
+        OpenManzi_SetSpriteDimensions(rngFace, 0, 0, 251, 251);
+        OpenManzi_SetSpriteDestination(rngFace, 291, 203, 0, 0);
+        OpenManzi_RenderSprite(renderer, rngFace, 0, NULL, SDL_FLIP_HORIZONTAL);
+
         SDL_RenderPresent(renderer);
     }
 
     OpenManzi_DeleteSprite(bg);
     OpenManzi_DeleteSprite(bgCutin);
+    OpenManzi_DeleteSprite(rng);
+    OpenManzi_DeleteSprite(rngFace);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     IMG_Quit();
