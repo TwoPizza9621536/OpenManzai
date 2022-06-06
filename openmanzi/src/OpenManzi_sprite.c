@@ -16,10 +16,13 @@ struct OpenManzi_Sprite
  * Create and allocate memory for our sprite with an image we want to draw so we
  * do not have to do it manually.
  */
-OpenManzi_Sprite* OpenManzi_CreateSprite(SDL_Renderer *renderer, const char *imagePath)
+OpenManzi_Sprite *OpenManzi_CreateSprite(SDL_Renderer *renderer,
+                                         const char *imagePath)
 {
-    OpenManzi_Sprite *sprite = (OpenManzi_Sprite*)SDL_malloc(sizeof(OpenManzi_Sprite));
-    if (!sprite->image) SDL_free(sprite->image);
+    OpenManzi_Sprite *sprite =
+        (OpenManzi_Sprite *)SDL_malloc(sizeof(OpenManzi_Sprite));
+    if (!sprite->image)
+        SDL_free(sprite->image);
 
     SDL_Texture *image = IMG_LoadTexture(renderer, imagePath);
     if (image == NULL)
@@ -37,8 +40,10 @@ OpenManzi_Sprite* OpenManzi_CreateSprite(SDL_Renderer *renderer, const char *ima
  */
 void OpenManzi_DeleteSprite(OpenManzi_Sprite *sprite)
 {
-    if (sprite == NULL) return;
-    if (sprite->image == NULL) return;
+    if (sprite == NULL)
+        return;
+    if (sprite->image == NULL)
+        return;
     SDL_DestroyTexture(sprite->image);
     SDL_free(sprite);
 }
@@ -49,7 +54,9 @@ void OpenManzi_DeleteSprite(OpenManzi_Sprite *sprite)
  *
  * Set the coordinates and size of the image we want to draw from.
  */
-void OpenManzi_SetSpriteDimensions(OpenManzi_Sprite *sprite, int x, int y, int width, int height)
+void OpenManzi_SetSpriteDimensions(OpenManzi_Sprite *sprite, const int x,
+                                   const int y, const int width,
+                                   const int height)
 {
     SDL_Rect rectangle;
     rectangle.x = x;
@@ -76,7 +83,9 @@ void OpenManzi_SetSpriteDimensions(OpenManzi_Sprite *sprite, int x, int y, int w
  * Set the placement and the size of the image we want draw to.
  * SDL will automatically resize the image when given the width and height.
  */
-void OpenManzi_SetSpriteDestination(OpenManzi_Sprite *sprite, int x, int y, int width, int height)
+void OpenManzi_SetSpriteDestination(OpenManzi_Sprite *sprite, const int x,
+                                    const int y, const int width,
+                                    const int height)
 {
     SDL_Rect rectangle;
     rectangle.x = x;
@@ -101,7 +110,10 @@ void OpenManzi_SetSpriteDestination(OpenManzi_Sprite *sprite, int x, int y, int 
  * An abstraction layer to render the sprite so we do not have pass additional
  * pointers.
  */
-void OpenManzi_RenderSprite(SDL_Renderer *renderer, OpenManzi_Sprite *sprite)
+void OpenManzi_RenderSprite(SDL_Renderer *renderer, OpenManzi_Sprite *sprite,
+                            const double angle, SDL_Point *center,
+                            SDL_RendererFlip flip)
 {
-    SDL_RenderCopy(renderer, sprite->image, &sprite->dimensions, &sprite->destination);
+    SDL_RenderCopyEx(renderer, sprite->image, &sprite->dimensions,
+                     &sprite->destination, angle, center, flip);
 }

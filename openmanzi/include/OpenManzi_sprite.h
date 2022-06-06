@@ -18,56 +18,64 @@
 struct OpenManzi_Sprite;
 typedef struct OpenManzi_Sprite OpenManzi_Sprite;
 
-/* Set C calling convention in C++, so C++ does not name mangle functions. */
 #ifdef __cplusplus
-extern "C" {
+/* Set C calling convention in C++, so C++ does not name mangle functions. */
+extern "C"
+{
 #endif
 
-/**
- * @brief
- *
- * @param renderer
- * @param imagePath
- * @return OpenManzi_Sprite*
- */
-OpenManzi_Sprite* OpenManzi_CreateSprite(SDL_Renderer *renderer, const char *imagePath);
+    /**
+     * @brief
+     *
+     * @param renderer
+     * @param imagePath
+     * @return OpenManzi_Sprite*
+     */
+    OpenManzi_Sprite *OpenManzi_CreateSprite(SDL_Renderer *renderer,
+                                             const char *imagePath);
 
-/**
- * @brief Frees sprite and it's texture once it has been used.
- *
- * @param sprite
- */
-void OpenManzi_DeleteSprite(OpenManzi_Sprite *sprite);
+    /**
+     * @brief Frees sprite and it's texture once it has been used.
+     *
+     * @param sprite
+     */
+    void OpenManzi_DeleteSprite(OpenManzi_Sprite *sprite);
 
-/**
- * @brief Set the location of the sprite and its size.
- *
- * @param sprite
- * @param x
- * @param y
- * @param width
- * @param height
- */
-void OpenManzi_SetSpriteDimensions(OpenManzi_Sprite *sprite, int x, int y, int width, int height);
+    /**
+     * @brief Set the location of the sprite and its size.
+     *
+     * @param sprite
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     */
+    void OpenManzi_SetSpriteDimensions(OpenManzi_Sprite *sprite, const int x,
+                                       const int y, const int width,
+                                       const int height);
 
-/**
- * @brief
- *
- * @param sprite
- * @param x
- * @param y
- * @param width
- * @param height
- */
-void OpenManzi_SetSpriteDestination(OpenManzi_Sprite *sprite, int x, int y, int width, int height);
+    /**
+     * @brief
+     *
+     * @param sprite
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     */
+    void OpenManzi_SetSpriteDestination(OpenManzi_Sprite *sprite, const int x,
+                                        const int y, const int width,
+                                        const int height);
 
-/**
- * @brief
- *
- * @param sprite
- * @param renderer The SDL renderer context to draw the sprite.
- */
-void OpenManzi_RenderSprite(SDL_Renderer *renderer, OpenManzi_Sprite *sprite);
+    /**
+     * @brief
+     *
+     * @param sprite
+     * @param renderer The SDL renderer context to draw the sprite.
+     */
+    void OpenManzi_RenderSprite(SDL_Renderer *renderer,
+                                OpenManzi_Sprite *sprite, const double angle,
+                                SDL_Point *center, SDL_RendererFlip flip);
 
 #ifdef __cplusplus
 } /* extern "C" { */

@@ -1,0 +1,11 @@
+# Format Style Options - Created with Clang Power Tools
+---
+BasedOnStyle: WebKit
+AlignAfterOpenBracket: Align
+BreakBeforeBinaryOperators: None
+BreakBeforeBraces: Allman
+ColumnLimit: 80
+DerivePointerAlignment: true
+ExperimentalAutoDetectBinPacking: true
+IndentCaseLabels: true
+...
