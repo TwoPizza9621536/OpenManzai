@@ -8,4 +8,8 @@ TODO: Add a brief explanation about what OpenManzi is.
 
 ## Building
 
+## Contributing
+
+## Code of Conduct
+
 ## License

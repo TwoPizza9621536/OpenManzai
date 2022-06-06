@@ -12,3 +12,4 @@ target_link_libraries(OpenManzi INTERFACE ${SDL2_LIBRARIES}
 set_target_properties(
     OpenManzi PROPERTIES PUBLIC_HEADER include/OpenManzi.h
                          PUBLIC_HEADER include/OpenManzi_sprite.h)
+set_target_properties(OpenManzi PROPERTIES POSITION_INDEPENDENT_CODE On)

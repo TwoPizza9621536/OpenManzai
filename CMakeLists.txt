@@ -3,32 +3,33 @@
 # SPDX-License-Identifier: CC0-1.0
 
 cmake_minimum_required(VERSION 3.12)
-
-if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
-    message(
-        FATAL_ERROR
-            "Prevented in-tree built. Please create a build directory outside of the OpenManzi source code and call cmake from there."
-    )
-endif()
-
 project(
     OpenManzi
     VERSION 0.0.0
     LANGUAGES C)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
+
+if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
+    message(
+        FATAL_ERROR
+            "Please run cmake in a build directory instead of running cmake inside of OpenManzi source directory."
+    )
+endif()
+
 set(BIN_DIR ${OpenManzi_SOURCE_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(CMAKE_C_STANDARD 11)
-set(CMAKE_C_STANDARD_REQUIRED True)
+set(CMAKE_C_STANDARD_REQUIRED On)
 set(CMAKE_C_EXTENSIONS Off)
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED On)
 set(CMAKE_CXX_EXTENSIONS Off)
 
-option(BUILD_SHARED_LIBS "Build shared libraries" True)
-option(BUILD_EXAMPLES "Build examples applications" True)
-option(CMAKE_VERBOSE_MAKEFILE "Have verbose output" True)
+option(BUILD_SHARED_LIBS "Build shared libraries" On)
+option(BUILD_EXAMPLES "Build examples applications" Off)
+option(CMAKE_VERBOSE_MAKEFILE "Have verbose output" Off)
 
 if(MSVC)
     add_compile_options(/W4 /Wall /WX /guard:cf /sdl /GS)
@@ -55,6 +56,11 @@ endif()
 find_package(PkgConfig REQUIRED)
 pkg_search_module(SDL2 REQUIRED sdl2)
 pkg_search_module(SDL2_IMAGE REQUIRED SDL2_image)
+
+if(NOT ${SDL2_FOUND} OR NOT ${SDL2_IMAGE_FOUND})
+    find_package(SDL2 REQUIRED)
+    find_package(SDL2_IMAGE REQUIRED)
+endif()
 
 add_subdirectory(openmanzi)
 if(BUILD_EXAMPLES)
