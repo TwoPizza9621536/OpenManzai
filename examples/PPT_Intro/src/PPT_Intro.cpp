@@ -9,9 +9,6 @@ static const int WINDOW_HEIGHT = 820;
 static const int BACKGROUND_WIDTH = 2000;
 static const int BACKGROUND_HEIGHT = 1024;
 
-static const int BACKGROUND_CUTIN_WIDTH = 814;
-static const int BACKGROUND_CUTIN_HEIGHT = 136;
-
 int main()
 {
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -41,23 +38,17 @@ int main()
         return -1;
     }
 
-    OpenManzi_Sprite *backgroundCutinOne = OpenManzi_CreateSprite(renderer, "assets/bg/school/school_0.png");
+    OpenManzi_Sprite *backgroundCutin = OpenManzi_CreateSprite(renderer, "assets/bg/school/school_0.png");
     OpenManzi_Sprite *background = OpenManzi_CreateSprite(renderer, "assets/bg/school/school_1.png");
     if (background == NULL)
     {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not create sprite: %s\n", SDL_GetError());
         OpenManzi_DeleteSprite(background);
-        OpenManzi_DeleteSprite(backgroundCutinOne);
+        OpenManzi_DeleteSprite(backgroundCutin);
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         return -1;
     }
-
-    OpenManzi_SetSpriteDimensions(background, 0, 0, BACKGROUND_WIDTH, BACKGROUND_HEIGHT);
-    OpenManzi_SetSpriteDimensions(backgroundCutinOne, 0, 888, BACKGROUND_CUTIN_WIDTH, BACKGROUND_CUTIN_HEIGHT);
-
-    OpenManzi_SetSpriteDestination(background, 0, 110, WINDOW_WIDTH, WINDOW_HEIGHT);
-    OpenManzi_SetSpriteDestination(backgroundCutinOne, 0, 0, 651, 110);
 
     SDL_Event event;
     SDL_bool quit = SDL_FALSE;
@@ -73,13 +64,23 @@ int main()
             }
         }
         SDL_RenderClear(renderer);
+
+        OpenManzi_SetSpriteDimensions(backgroundCutin, 0, 0, 1240, 440);
+        OpenManzi_SetSpriteDestination(backgroundCutin, 644, 0, 1240, 440);
+        OpenManzi_RenderSprite(renderer, backgroundCutin);
+
+        OpenManzi_SetSpriteDimensions(background, 0, 0, BACKGROUND_WIDTH, BACKGROUND_HEIGHT);
+        OpenManzi_SetSpriteDestination(background, 0, 110, WINDOW_WIDTH, WINDOW_HEIGHT);
         OpenManzi_RenderSprite(renderer, background);
-        OpenManzi_RenderSprite(renderer, backgroundCutinOne);
+
+        OpenManzi_SetSpriteDimensions(backgroundCutin, 0, 888, 814, 136);
+        OpenManzi_SetSpriteDestination(backgroundCutin, 0, 0, 651, 110);
+        OpenManzi_RenderSprite(renderer, backgroundCutin);
         SDL_RenderPresent(renderer);
     }
 
     OpenManzi_DeleteSprite(background);
-    OpenManzi_DeleteSprite(backgroundCutinOne);
+    OpenManzi_DeleteSprite(backgroundCutin);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     IMG_Quit();
