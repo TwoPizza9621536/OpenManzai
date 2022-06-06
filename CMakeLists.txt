@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2022 OpenManzi Contributors
+#
+# SPDX-License-Identifier: CC0-1.0
+
 cmake_minimum_required(VERSION 3.12)
 project(OpenManzi VERSION 0.0.0)
 
@@ -10,6 +14,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 option(BUILD_SHARED_LIBS "Build shared libraries" True)
+option(BUILD_EXAMPLES "Build examples applications" True)
 
 if(MSVC)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /W4 /Wall /WX /guard:cf /sdl /GS")
@@ -30,8 +35,10 @@ PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
 PKG_SEARCH_MODULE(SDL2_IMAGE REQUIRED SDL2_image)
 
 add_subdirectory(openmanzi)
-add_subdirectory(examples)
+if(BUILD_EXAMPLES)
+    add_subdirectory(examples)
 
-if (NOT ${PROJECT_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_BINARY_DIR})
-	file(COPY "${PROJECT_SOURCE_DIR}/assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin")
+    if (NOT ${PROJECT_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_BINARY_DIR})
+        file(COPY "${PROJECT_SOURCE_DIR}/assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin")
+    endif()
 endif()

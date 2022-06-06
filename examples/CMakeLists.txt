@@ -1,5 +1,5 @@
-project(examples)
-add_executable(testlib1 src/testlib1.cpp)
-target_link_libraries(testlib1 OpenManzi)
+# SPDX-FileCopyrightText: 2022 OpenManzi Contributors
+#
+# SPDX-License-Identifier: CC0-1.0
 
-install(TARGETS testlib1 RUNTIME DESTINATION ${BIN_DIR})
+add_subdirectory(PPT_Intro)
