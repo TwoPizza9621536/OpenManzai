@@ -1,6 +1,6 @@
 format:
     disable: false
-    line_width: 80
+    line_width: 120
     tab_size: 4
     _help_use_tabchars:
     use_tabchars: false

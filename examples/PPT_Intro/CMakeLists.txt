@@ -1,9 +1,8 @@
-# SPDX-FileCopyrightText: 2022 OpenManzi Contributors
+# SPDX-FileCopyrightText: 2022 OpenManzai Contributors
 #
 # SPDX-License-Identifier: CC0-1.0
 
-project(examples)
 add_executable(PPT_Intro src/PPT_Intro.cpp)
-target_link_libraries(PPT_Intro OpenManzi)
+target_link_libraries(PPT_Intro OpenManzai)
 
 install(TARGETS PPT_Intro RUNTIME DESTINATION ${BIN_DIR})
