@@ -2,13 +2,13 @@
 
 // struct OpenManzai_Background
 // {
-//     OpenManzai_Sprite* background;
+//     OpenManzai_Sprite** background;
 // };
 
-// OpenManzai_Background* OpenManzai_CreateBackground()
+// OpenManzai_Background* OpenManzai_CreateBackground(const char** sheets)
 // {
 //     OpenManzai_Background* background = (OpenManzai_Background*)SDL_malloc(sizeof(OpenManzai_Background));
-//     FILE* file = fopen();
+//     OpenManzi_Sprite* sprite = (OpenManzi_Sprite*)SDL_malloc(sizeof(OpenManzi_Sprite));
 //     return background;
 // }
 
@@ -20,5 +20,5 @@
 
 // void OpenManzai_DeleteBackground(OpenManzai_Background* background)
 // {
-
+//
 // }

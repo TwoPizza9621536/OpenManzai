@@ -100,15 +100,15 @@ void OpenManzai_SetSpriteDestination(OpenManzai_Sprite* sprite, const int x, con
         rectangle.w = width;
         rectangle.h = height;
     }
-    else if (width < 0)
-    {
-        rectangle.w = sprite->dimensions.w;
-        rectangle.h = height;
-    }
-    else if (width < 0)
+    else if (width > 0)
     {
         rectangle.w = width;
         rectangle.h = sprite->dimensions.h;
+    }
+    else if (height > 0)
+    {
+        rectangle.w = sprite->dimensions.w;
+        rectangle.h = height;
     }
     else
     {
@@ -119,7 +119,7 @@ void OpenManzai_SetSpriteDestination(OpenManzai_Sprite* sprite, const int x, con
     sprite->destination = rectangle;
 }
 
-void OpenManzai_TargetSprite(SDL_Renderer* renderer, OpenManzai_Sprite* sprite)
+void OpenManzai_SetTargetSprite(SDL_Renderer* renderer, OpenManzai_Sprite* sprite)
 {
     SDL_SetRenderTarget(renderer, sprite->image);
 }

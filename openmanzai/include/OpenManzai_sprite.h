@@ -51,6 +51,15 @@ extern "C"
      */
     void OpenManzai_SetSpriteDimensions(OpenManzai_Sprite* sprite, const int x, const int y, const int width, const int height);
 
+    /**
+     * \brief
+     *
+     * \param sprite
+     * \param x
+     * \param y
+     * \param width
+     * \param height
+     */
     void OpenManzai_SetSpriteDestination(OpenManzai_Sprite* sprite, const int x, const int y, const int width, const int height);
 
     /**
@@ -59,7 +68,7 @@ extern "C"
      * \param renderer
      * \param sprite
      */
-    void OpenManzai_TargetSprite(SDL_Renderer* renderer, OpenManzai_Sprite* sprite);
+    void OpenManzai_SetTargetSprite(SDL_Renderer* renderer, OpenManzai_Sprite* sprite);
 
     /**
      * \brief

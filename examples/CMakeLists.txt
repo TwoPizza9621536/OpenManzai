@@ -2,5 +2,5 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-project(examples LANGUAGES CXX)
+project(examples LANGUAGES C CXX)
 add_subdirectory(PPT_Intro)
