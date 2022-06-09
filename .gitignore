@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022 OpenManzi Contributors
+# SPDX-FileCopyrightText: 2022 OpenManzai Contributors
 #
 # SPDX-License-Identifier: CC0-1.0
 

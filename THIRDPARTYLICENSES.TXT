@@ -1,4 +1,4 @@
-OpenManzi requires the following third party dependencies or libraries that are
+OpenManzai requires the following third party dependencies or libraries that are
 distributed under licenses different other than the TODO: INSERT LICENSE using
 the following SPDX identifier expressions:
 
@@ -10,7 +10,7 @@ Below is a list of dependencies or libraries this project uses and their
 respective licenses. In the event if we accidentally left a library out of this
 list, please bring it to our attention through creating an issue here:
 
-        https://github.com/TwoPizza9621536/OpenManzi/issues
+        https://github.com/TwoPizza9621536/OpenManzai/issues
 
 Simple DirectMedia Layer: https://libsdl.org
 sdl2-cmake-scripts: https://github.com/tcbrindle/sdl2-cmake-scripts
