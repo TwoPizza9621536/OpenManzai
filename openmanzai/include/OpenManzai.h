@@ -18,23 +18,19 @@
 
 #include "OpenManzai_sprite.h"
 
- // struct OpenManzai;
- // typedef struct OpenManzai OpenManzai;
+ /*
+ struct OpenManzai;
+ typedef struct OpenManzai OpenManzai;
 
- // struct OpenManzai_Background
- // {
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
 
- // };
- // typedef struct OpenManzai_Background OpenManzai_Background
+ void Rend
 
- // #ifdef __cplusplus
- // extern "C" {
- // #endif
-
- // void Rend
-
- // #ifdef __cplusplus
- // } /* extern "C" { */
- // #endif
+ #ifdef __cplusplus
+ } // extern "C" { //
+ #endif
+ */
 
 #endif /* OpenManzai_h_ */

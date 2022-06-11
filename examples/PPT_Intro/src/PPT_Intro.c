@@ -15,8 +15,10 @@
 
 static const char* WINDOW_NAME = "Puyo Puyo Tetris Intro";
 
-// static const int WINDOW_WIDTH = 2000;
-// static const int WINDOW_HEIGHT = 1024;
+/*
+static const int WINDOW_WIDTH = 2000;
+static const int WINDOW_HEIGHT = 1024;
+*/
 
 static const int WINDOW_WIDTH = 1920;
 static const int WINDOW_HEIGHT = 1080;
@@ -45,22 +47,33 @@ void Draw_Background(SDL_Renderer* renderer, OpenManzai_Sprite* bg, OpenManzai_S
     OpenManzai_SetSpriteDestination(bgCutin[0], 0, 0, 781, 137);
     OpenManzai_RenderSprite(renderer, bgCutin[0], 0, NULL, SDL_FLIP_NONE);
 
-    // OpenManzai_SetSpriteDimensions(bgCutin[0], 830, 475, 604, 514);
-    // OpenManzai_SetSpriteDestination(bgCutin[0], 995, 85, 464, 395);
-    // OpenManzai_RenderSprite(renderer, bgCutin[0], 0, NULL, SDL_FLIP_NONE);
+    /*
+    OpenManzai_SetSpriteDimensions(bgCutin[0], 830, 475, 604, 514);
+    OpenManzai_SetSpriteDestination(bgCutin[0], 995, 85, 464, 395);
+    OpenManzai_RenderSprite(renderer, bgCutin[0], 0, NULL, SDL_FLIP_NONE);
 
-    // OpenManzai_SetTargetSprite(renderer, bgCutin[1]);
-    // OpenManzai_SetSpriteDimensions(bgCutin[1], 0, 0, 0, 0);
-    // OpenManzai_SetSpriteDestination(bgCutin[1], 1200, 80, 413, 413);
-    // OpenManzai_RenderSprite(renderer, bgCutin[1], 0, NULL, SDL_FLIP_NONE);
+    OpenManzai_SetTargetSprite(renderer, bgCutin[1]);
+    OpenManzai_SetSpriteDimensions(bgCutin[1], 0, 0, 0, 0);
+    OpenManzai_SetSpriteDestination(bgCutin[1], 1200, 80, 413, 413);
+    OpenManzai_RenderSprite(renderer, bgCutin[1], 0, NULL, SDL_FLIP_NONE);
 
-    // OpenManzai_SetSpriteDimensions(bgCutin, 1748, 0, 2048, 632);
-    // OpenManzai_SetSpriteDestination(bgCutin, 0, 50, 326, 1024);
-    // OpenManzai_RenderSprite(renderer, bgCutin, 0, NULL, SDL_FLIP_NONE);
+    OpenManzai_SetSpriteDimensions(bgCutin, 1748, 0, 2048, 632);
+    OpenManzai_SetSpriteDestination(bgCutin, 0, 50, 326, 1024);
+    OpenManzai_RenderSprite(renderer, bgCutin, 0, NULL, SDL_FLIP_NONE);
+    */
 }
 
 int main()
 {
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+    OpenManzai_Sprite* bg;
+    OpenManzai_Sprite** bgCutin;
+    OpenManzai_Sprite* rng;
+    OpenManzai_Sprite* rngFace;
+    SDL_Event event;
+    SDL_bool quit;
+
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
     {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR,
@@ -77,7 +90,7 @@ int main()
         return -1;
     }
 
-    SDL_Window* window = SDL_CreateWindow(WINDOW_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    window = SDL_CreateWindow(WINDOW_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     if (window == NULL)
     {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR,
@@ -86,23 +99,25 @@ int main()
         return -1;
     }
 
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (renderer == NULL)
     {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not create a renderer: %s\n", SDL_GetError());
         SDL_DestroyWindow(window);
         return -1;
     }
-    // SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
-    // SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
+    /*
+    SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
+    SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
+    */
 
-    OpenManzai_Sprite* bg = OpenManzai_CreateSprite(renderer, BACKGROUND_PATH);
-    OpenManzai_Sprite** bgCutin = (OpenManzai_Sprite**)SDL_malloc(sizeof(OpenManzai_Sprite*) * 2);
+    bg = OpenManzai_CreateSprite(renderer, BACKGROUND_PATH);
+    bgCutin = (OpenManzai_Sprite**)SDL_malloc(sizeof(OpenManzai_Sprite*) * 2);
     bgCutin[0] = OpenManzai_CreateSprite(renderer, BACKGROUND_CUTIN_PATH);
     bgCutin[1] = OpenManzai_CreateSprite(renderer, BACKGROUND_TREE_PATH);
 
-    OpenManzai_Sprite* rng = OpenManzai_CreateSprite(renderer, RINGO_PATH);
-    OpenManzai_Sprite* rngFace = OpenManzai_CreateSprite(renderer, RINGO_FACE_PATH);
+    rng = OpenManzai_CreateSprite(renderer, RINGO_PATH);
+    rngFace = OpenManzai_CreateSprite(renderer, RINGO_FACE_PATH);
     if (bg == NULL || bgCutin[0] == NULL || rng == NULL || rngFace == NULL)
     {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not create sprite: %s\n", SDL_GetError());
@@ -111,8 +126,8 @@ int main()
         return -1;
     }
 
-    SDL_Event event;
-    SDL_bool quit = SDL_FALSE;
+
+    quit = SDL_FALSE;
     while (!quit)
     {
         while (SDL_PollEvent(&event))
@@ -128,15 +143,17 @@ int main()
 
         Draw_Background(renderer, bg, bgCutin);
 
-        // OpenManzai_SetTargetSprite(renderer, rng);
-        // OpenManzai_SetSpriteDimensions(rng, 0, 0, 512, 1024);
-        // OpenManzai_SetSpriteDestination(rng, 50, 100, 0, 0);
-        // OpenManzai_RenderSprite(renderer, rng, 0, NULL, SDL_FLIP_HORIZONTAL);
+        /*
+        OpenManzai_SetTargetSprite(renderer, rng);
+        OpenManzai_SetSpriteDimensions(rng, 0, 0, 512, 1024);
+        OpenManzai_SetSpriteDestination(rng, 50, 100, 0, 0);
+        OpenManzai_RenderSprite(renderer, rng, 0, NULL, SDL_FLIP_HORIZONTAL);
 
-        // OpenManzai_SetTargetSprite(renderer, rngFace);
-        // OpenManzai_SetSpriteDimensions(rngFace, 0, 0, 252, 252);
-        // OpenManzai_SetSpriteDestination(rngFace, 241, 203, 0, 0);
-        // OpenManzai_RenderSprite(renderer, rngFace, 0, NULL, SDL_FLIP_HORIZONTAL);
+        OpenManzai_SetTargetSprite(renderer, rngFace);
+        OpenManzai_SetSpriteDimensions(rngFace, 0, 0, 252, 252);
+        OpenManzai_SetSpriteDestination(rngFace, 241, 203, 0, 0);
+        OpenManzai_RenderSprite(renderer, rngFace, 0, NULL, SDL_FLIP_HORIZONTAL);
+        */
 
         SDL_RenderPresent(renderer);
     }

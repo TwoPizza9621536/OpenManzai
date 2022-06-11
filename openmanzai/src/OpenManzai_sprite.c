@@ -31,8 +31,8 @@ struct OpenManzai_Sprite
 OpenManzai_Sprite* OpenManzai_CreateSprite(SDL_Renderer* renderer, const char* imagePath)
 {
     OpenManzai_Sprite* sprite = (OpenManzai_Sprite*)SDL_malloc(sizeof(OpenManzai_Sprite));
-
     SDL_Texture* image = IMG_LoadTexture(renderer, imagePath);
+
     if (image == NULL)
     {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not load sprite: %s\n", imagePath);
@@ -48,7 +48,8 @@ OpenManzai_Sprite* OpenManzai_CreateSprite(SDL_Renderer* renderer, const char* i
  */
 void OpenManzai_DeleteSprite(OpenManzai_Sprite* sprite)
 {
-    if (sprite == NULL || sprite->image == NULL) return;
+    if (sprite == NULL) return;
+    else if (sprite->image == NULL) SDL_free(sprite);
     SDL_DestroyTexture(sprite->image);
     SDL_free(sprite);
 }
