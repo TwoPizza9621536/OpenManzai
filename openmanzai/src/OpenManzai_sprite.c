@@ -2,7 +2,7 @@
  * \file OpenManzai_sprite.c
  * \author your name (you@domain.com)
  * \brief
- * \version 0.1
+ * \version 0.0.0
  * \date 2022-06-06
  *
  * \copyright Copyright (c) 2022
@@ -20,7 +20,7 @@
 
 struct OpenManzai_Sprite
 {
-    SDL_Rect dimensions, destination;
+    SDL_Rect* source, * destination;
     SDL_Texture* image;
 };
 
@@ -32,6 +32,9 @@ OpenManzai_Sprite* OpenManzai_CreateSprite(SDL_Renderer* renderer, const char* i
 {
     OpenManzai_Sprite* sprite = (OpenManzai_Sprite*)SDL_malloc(sizeof(OpenManzai_Sprite));
     SDL_Texture* image = IMG_LoadTexture(renderer, imagePath);
+
+    sprite->source = (SDL_Rect*)SDL_malloc(sizeof(SDL_Rect));
+    sprite->destination = (SDL_Rect*)SDL_malloc(sizeof(SDL_Rect));
 
     if (image == NULL)
     {
@@ -48,10 +51,14 @@ OpenManzai_Sprite* OpenManzai_CreateSprite(SDL_Renderer* renderer, const char* i
  */
 void OpenManzai_DeleteSprite(OpenManzai_Sprite* sprite)
 {
-    if (sprite == NULL) return;
-    else if (sprite->image == NULL) SDL_free(sprite);
-    SDL_DestroyTexture(sprite->image);
-    SDL_free(sprite);
+    if (sprite->destination != NULL)
+        SDL_free(sprite->destination);
+    if (sprite->source != NULL)
+        SDL_free(sprite->source);
+    if (sprite->image != NULL)
+        SDL_DestroyTexture(sprite->image);
+    if (sprite != NULL)
+        SDL_free(sprite);
 }
 
 /**
@@ -60,22 +67,19 @@ void OpenManzai_DeleteSprite(OpenManzai_Sprite* sprite)
  *
  * Set the coordinates and size of the image we want to draw from.
  */
-void OpenManzai_SetSpriteDimensions(OpenManzai_Sprite* sprite, const int x, const int y, const int width, const int height)
+void OpenManzai_SetSpriteSource(OpenManzai_Sprite* sprite, const int x, const int y, const int width, const int height)
 {
-    SDL_Rect rectangle;
-    rectangle.x = x;
-    rectangle.y = y;
+    sprite->source->x = x;
+    sprite->source->y = y;
     if (width > 0 && height > 0)
     {
-        rectangle.w = width;
-        rectangle.h = height;
+        sprite->source->w = width;
+        sprite->source->h = height;
     }
     else
     {
-        SDL_QueryTexture(sprite->image, NULL, NULL, &rectangle.w, &rectangle.h);
+        SDL_QueryTexture(sprite->image, NULL, NULL, &sprite->source->w, &sprite->source->h);
     }
-
-    sprite->dimensions = rectangle;
 }
 
 /**
@@ -92,32 +96,19 @@ void OpenManzai_SetSpriteDimensions(OpenManzai_Sprite* sprite, const int x, cons
  */
 void OpenManzai_SetSpriteDestination(OpenManzai_Sprite* sprite, const int x, const int y, const int width, const int height)
 {
-    SDL_Rect rectangle;
-    rectangle.x = x;
-    rectangle.y = y;
+    sprite->destination->x = x;
+    sprite->destination->y = y;
 
     if (width > 0 && height > 0)
     {
-        rectangle.w = width;
-        rectangle.h = height;
-    }
-    else if (width > 0)
-    {
-        rectangle.w = width;
-        rectangle.h = sprite->dimensions.h;
-    }
-    else if (height > 0)
-    {
-        rectangle.w = sprite->dimensions.w;
-        rectangle.h = height;
+        sprite->destination->w = width;
+        sprite->destination->h = height;
     }
     else
     {
-        rectangle.w = sprite->dimensions.w;
-        rectangle.h = sprite->dimensions.h;
+        sprite->destination->w = sprite->source->w;
+        sprite->destination->h = sprite->source->h;
     }
-
-    sprite->destination = rectangle;
 }
 
 void OpenManzai_SetTargetSprite(SDL_Renderer* renderer, OpenManzai_Sprite* sprite)
@@ -136,5 +127,5 @@ void OpenManzai_SetTargetSprite(SDL_Renderer* renderer, OpenManzai_Sprite* sprit
  */
 void OpenManzai_RenderSprite(SDL_Renderer* renderer, OpenManzai_Sprite* sprite, const double angle, SDL_Point* center, SDL_RendererFlip flip)
 {
-    SDL_RenderCopyEx(renderer, sprite->image, &sprite->dimensions, &sprite->destination, angle, center, flip);
+    SDL_RenderCopyEx(renderer, sprite->image, sprite->source, sprite->destination, angle, center, flip);
 }

@@ -49,7 +49,7 @@ extern "C"
      * \param width
      * \param height
      */
-    void OpenManzai_SetSpriteDimensions(OpenManzai_Sprite* sprite, const int x, const int y, const int width, const int height);
+    void OpenManzai_SetSpriteSource(OpenManzai_Sprite* sprite, const int x, const int y, const int width, const int height);
 
     /**
      * \brief
