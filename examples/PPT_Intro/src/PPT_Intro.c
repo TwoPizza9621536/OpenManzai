@@ -15,11 +15,6 @@
 
 static const char* WINDOW_NAME = "Puyo Puyo Tetris Intro";
 
-/*
-static const int WINDOW_WIDTH = 2000;
-static const int WINDOW_HEIGHT = 1024;
-*/
-
 static const int WINDOW_WIDTH = 1280;
 static const int WINDOW_HEIGHT = 720;
 
@@ -34,17 +29,17 @@ void Draw_Background(SDL_Renderer* renderer, OpenManzai_Sprite* bg, OpenManzai_S
 {
     OpenManzai_SetTargetSprite(renderer, bgCutin[0]);
     OpenManzai_SetSpriteSource(bgCutin[0], 0, 0, 1240, 440);
-    OpenManzai_SetSpriteDestination(bgCutin[0], 775, 0, 1135, 465);
+    OpenManzai_SetSpriteDestination(bgCutin[0], (int)(761 * 0.64), 0, (int)(1240 * 0.64), (int)(440 * 0.7));
     OpenManzai_RenderSprite(renderer, bgCutin[0], 0, NULL, SDL_FLIP_NONE);
 
     OpenManzai_SetTargetSprite(renderer, bg);
     OpenManzai_SetSpriteSource(bg, 0, 0, 2000, 1024);
-    OpenManzai_SetSpriteDestination(bg, 0, (int)(136 * 0.4), WINDOW_WIDTH, WINDOW_HEIGHT - (int)(136 * 0.4));
+    OpenManzai_SetSpriteDestination(bg, 0, (int)(136 * 0.7), WINDOW_WIDTH, WINDOW_HEIGHT - (int)(136 * 0.7));
     OpenManzai_RenderSprite(renderer, bg, 0, NULL, SDL_FLIP_NONE);
 
     OpenManzai_SetTargetSprite(renderer, bgCutin[0]);
-    OpenManzai_SetSpriteSource(bgCutin[0], 0, 888, 814, 136);
-    OpenManzai_SetSpriteDestination(bgCutin[0], 0, 0, (int)(814 * 0.6), (int)(136 * 0.4));
+    OpenManzai_SetSpriteSource(bgCutin[0], 0, 888, 813, 136);
+    OpenManzai_SetSpriteDestination(bgCutin[0], 0, 0, (int)(813 * 0.64), (int)(136 * 0.7));
     OpenManzai_RenderSprite(renderer, bgCutin[0], 0, NULL, SDL_FLIP_NONE);
 
     /*
