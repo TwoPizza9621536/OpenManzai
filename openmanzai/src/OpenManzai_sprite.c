@@ -22,7 +22,7 @@ OpenManzai_Sprite* OpenManzai_CreateSprite(SDL_Renderer* renderer, const char* i
 
     if (image == NULL)
     {
-        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_ERROR, "Could not load image: %s\n", imagePath);
+        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_ERROR, SDL_GetError());
         return NULL;
     }
     sprite->image = image;

@@ -96,7 +96,7 @@ int main()
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (renderer == NULL)
     {
-        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not create a renderer: %s\n", SDL_GetError());
+        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_CRITICAL, "Could not create a renderer: %s\n", SDL_GetError());
         SDL_DestroyWindow(window);
         return -1;
     }
@@ -114,7 +114,6 @@ int main()
     rngFace = OpenManzai_CreateSprite(renderer, RINGO_FACE_PATH);
     if (bg == NULL || bgCutin[0] == NULL || rng == NULL || rngFace == NULL)
     {
-        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not create sprite: %s\n", SDL_GetError());
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         return -1;
