@@ -12,22 +12,9 @@
 #include "OpenManzai_sprite.h"
 
  /**
-  * ? Please suggest a better variable and function names. See issue #6.
-  *
-  * Abstraction layer to store information about rhe sprite so we do not have to
-  * set each variable individually and keep repeating ourselves.
+  * Create and allocate memory for our sprite with an image we want to draw so we
+  * do not have to do it manually.
   */
-
-struct OpenManzai_Sprite
-{
-    SDL_Rect dimensions, destination;
-    SDL_Texture* image;
-};
-
-/**
- * Create and allocate memory for our sprite with an image we want to draw so we
- * do not have to do it manually.
- */
 OpenManzai_Sprite* OpenManzai_CreateSprite(SDL_Renderer* renderer, const char* imagePath)
 {
     OpenManzai_Sprite* sprite = (OpenManzai_Sprite*)SDL_malloc(sizeof(OpenManzai_Sprite));
@@ -35,7 +22,7 @@ OpenManzai_Sprite* OpenManzai_CreateSprite(SDL_Renderer* renderer, const char* i
 
     if (image == NULL)
     {
-        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not load sprite: %s\n", imagePath);
+        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_ERROR, "Could not load image: %s\n", imagePath);
         return NULL;
     }
     sprite->image = image;
