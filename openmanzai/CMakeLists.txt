@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-add_library(OpenManzai src/OpenManzai.c src/OpenManzai_background.c src/OpenManzai_character.c src/OpenManzai_sprite.c)
+add_library(OpenManzai src/OpenManzai.c src/OpenManzai_background.c src/OpenManzai_object.c src/OpenManzai_sprite.c)
 
 target_include_directories(OpenManzai PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include ${SDL2_INCLUDE_DIRS}
                                              ${SDL2_IMAGE_INCLUDE_DIRS})

@@ -23,7 +23,7 @@
    */
 typedef struct
 {
-    SDL_Rect dimensions, destination;
+    SDL_Rect* source, * destination;
     SDL_Texture* image;
 } OpenManzai_Sprite;
 
@@ -58,7 +58,7 @@ extern "C"
      * \param width
      * \param height
      */
-    void OpenManzai_SetSpriteDimensions(OpenManzai_Sprite* sprite, const int x, const int y, const int width, const int height);
+    void OpenManzai_SetSpriteSource(OpenManzai_Sprite* sprite, const int x, const int y, const int width, const int height);
 
     /**
      * \brief
