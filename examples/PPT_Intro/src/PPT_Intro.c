@@ -71,26 +71,20 @@ int main()
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
     {
-        SDL_LogError(SDL_LOG_CATEGORY_ERROR,
-            "Couldn't initialize SDL2. Error: %s\n",
-            SDL_GetError());
+        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_CRITICAL, "Couldn't initialize SDL2. Error: %s\n", SDL_GetError());
         return -1;
     }
 
     if ((IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG) != IMG_INIT_PNG)
     {
-        SDL_LogError(SDL_LOG_CATEGORY_ERROR,
-            "Couldn't initialize SDL2_Image: %s\n",
-            SDL_GetError());
+        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_CRITICAL, "Couldn't initialize SDL2_Image: %s\n", SDL_GetError());
         return -1;
     }
 
     window = SDL_CreateWindow(WINDOW_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     if (window == NULL)
     {
-        SDL_LogError(SDL_LOG_CATEGORY_ERROR,
-            "Could not create a window: %s\n",
-            SDL_GetError());
+        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_CRITICAL, "Could not create a window: %s\n", SDL_GetError());
         return -1;
     }
 

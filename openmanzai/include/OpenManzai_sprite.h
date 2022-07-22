@@ -15,8 +15,17 @@
 #include "SDL.h"
 #include "SDL_image.h"
 
-struct OpenManzai_Sprite;
-typedef struct OpenManzai_Sprite OpenManzai_Sprite;
+ /**
+   * ? Please suggest a better variable and function names. See issue #6.
+   *
+   * Abstraction layer to store information about rhe sprite so we do not have to
+   * set each variable individually and keep repeating ourselves.
+   */
+typedef struct
+{
+    SDL_Rect dimensions, destination;
+    SDL_Texture* image;
+} OpenManzai_Sprite;
 
 #ifdef __cplusplus
 /* Set C calling convention in C++, so C++ does not name mangle functions. */
